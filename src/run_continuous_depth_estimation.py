@@ -39,13 +39,14 @@ parser.add_argument("--disprefinenet_out_planes", type=int, default=32)
 parser.add_argument("--bi3dnet_disps_per_example_true", type=str2bool, default=True)
 
 # Input
-parser.add_argument("--pretrained", type=str)
-parser.add_argument("--img_left", type=str)
-parser.add_argument("--img_right", type=str)
-parser.add_argument("--disp_range_min", type=int)
-parser.add_argument("--disp_range_max", type=int)
-parser.add_argument("--crop_height", type=int)
-parser.add_argument("--crop_width", type=int)
+parser.add_argument("--pretrained", type=str, default="/home/itr/Documents/Bi3D/src/kitti15_continuous_depth_no_conf_reg.pth.tar")
+parser.add_argument("--img_left", type=str, default="left.jpg")
+parser.add_argument("--img_right", type=str, default="right.jpg")
+parser.add_argument("--crop_height", type=int, default=480)
+parser.add_argument("--crop_width", type=int, default=1920)
+parser.add_argument("--disp_range_min", type=int, default=0)
+parser.add_argument("--disp_range_max", type=int, default=192)
+
 
 args, unknown = parser.parse_known_args()
 

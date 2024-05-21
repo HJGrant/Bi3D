@@ -3,6 +3,7 @@ channels:
   - pytorch
   - soumith
   - defaults
+  - conda-forge
 dependencies:
   - _libgcc_mutex=0.1=main
   - blas=1.0=mkl
@@ -22,10 +23,6 @@ dependencies:
   - libstdcxx-ng=9.1.0=hdf63c60_0
   - libtiff=4.1.0=h2733197_1
   - lz4-c=1.9.2=he6710b0_0
-  - mkl=2020.1=217
-  - mkl-service=2.3.0=py37he904b0f_0
-  - mkl_fft=1.1.0=py37h23d657b_0
-  - mkl_random=1.1.1=py37h0573a6f_0
   - ncurses=6.2=he6710b0_1
   - ninja=1.9.0=py37hfd86e86_0
   - numpy=1.18.5=py37ha1c710e_0
@@ -52,3 +49,9 @@ dependencies:
     - protobuf==3.12.2
     - tensorboardx==2.1
 
+#i removed: 
+#  - mkl=2020.1=217
+#  - mkl-service=2.3.0=py37he904b0f_0
+#  - mkl_fft=1.1.0=py37h23d657b_0
+#  - mkl_random=1.1.1=py37h0573a6f_0
+#  - intel-openmp=2020.1=217

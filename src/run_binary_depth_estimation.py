@@ -25,6 +25,8 @@ model_names = sorted(name for name in models.__dict__ if name.islower() and not 
 # Parse arguments
 parser = argparse.ArgumentParser(allow_abbrev=False)
 
+print('CUDA available: ' + str(torch.cuda.is_available()))
+
 # Model
 parser.add_argument("--arch", type=str, default="bi3dnet_binary_depth")
 
@@ -40,14 +42,17 @@ parser.add_argument("--segrefinenet_in_planes", type=int, default=17)
 parser.add_argument("--segrefinenet_out_planes", type=int, default=8)
 
 # Input
-parser.add_argument("--pretrained", type=str)
-parser.add_argument("--img_left", type=str)
-parser.add_argument("--img_right", type=str)
-parser.add_argument("--disp_vals", type=float, nargs="*")
-parser.add_argument("--crop_height", type=int)
-parser.add_argument("--crop_width", type=int)
+parser.add_argument("--pretrained", type=str, default="/home/itr/Documents/Bi3D/src/kitti15_binary_depth.pth.tar")
+parser.add_argument("--img_left", type=str, default="left.png")
+parser.add_argument("--img_right", type=str, default="right.png")
+parser.add_argument("--disp_vals", type=float, nargs="*", default=[45, 120, 165, 192])
+parser.add_argument("--crop_height", type=int, default=1056)
+parser.add_argument("--crop_width", type=int, default=1920)
 
 args, unknown = parser.parse_known_args()
+
+img_left = "./left.png"
+img_right = "./right.png"
 
 ####################################################################################################
 def main():
@@ -64,7 +69,7 @@ def main():
     base_name = os.path.splitext(os.path.basename(args.img_left))[0]
 
     # Model
-    network_data = torch.load(args.pretrained)
+    network_data = torch.load(args.pretrained, map_location=torch.device('cuda'))
     print("=> using pre-trained model '{}'".format(args.arch))
     model = models.__dict__[args.arch](options, network_data).cuda()
 
@@ -126,7 +131,7 @@ def main():
     pdf_method = segs[1:, :, :] - segs[:-1, :, :]
 
     # Get the labels
-    labels_method = np.argmax(pdf_method, axis=0).astype(np.int)
+    labels_method = np.argmax(pdf_method, axis=0).astype(np.uint)
     disp_map = labels_method.astype(np.float32)
 
     disp_vals = args.disp_vals
