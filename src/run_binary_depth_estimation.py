@@ -43,9 +43,9 @@ parser.add_argument("--segrefinenet_out_planes", type=int, default=8)
 
 # Input
 parser.add_argument("--pretrained", type=str, default="/home/itr/Documents/Bi3D/src/kitti15_binary_depth.pth.tar")
-parser.add_argument("--img_left", type=str, default="left.png")
-parser.add_argument("--img_right", type=str, default="right.png")
-parser.add_argument("--disp_vals", type=float, nargs="*", default=[45, 120, 165, 192])
+parser.add_argument("--img_left", type=str, default="left.jpg")
+parser.add_argument("--img_right", type=str, default="right.jpg")
+parser.add_argument("--disp_vals", type=float, nargs="*", default=[9, 30, 42, 60, 78, 99, 120, 162, 177, 186, 192])
 parser.add_argument("--crop_height", type=int, default=1056)
 parser.add_argument("--crop_width", type=int, default=1920)
 
